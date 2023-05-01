@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.7" class="java.beans.XMLDecoder">
+ <object class="IdTracker">
+  <void property="_lastUniqueEmployeeID">
+   <string>PEID001</string>
+  </void>
+  <void property="_lastUniqueOrderID">
+   <string>OID000001</string>
+  </void>
+ </object>
+</java>

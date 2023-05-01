@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.7" class="java.beans.XMLDecoder">
+ <object class="Order">
+  <void property="_OrderID">
+   <string>OID000001</string>
+  </void>
+  <void property="_curTime">
+   <object class="java.sql.Timestamp">
+    <long>1682896450333</long>
+   </object>
+  </void>
+  <void property="_customer">
+   <object class="Customer"/>
+  </void>
+  <void property="_employee">
+   <object class="Employee">
+    <void property="_employeeID">
+     <string>PEID001</string>
+    </void>
+   </object>
+  </void>
+  <void property="_totalCost">
+   <double>505.5</double>
+  </void>
+  <void property="products">
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="Product">
+      <void property="_Photo_ID">
+       <int>5</int>
+      </void>
+      <void property="_Photo_type">
+       <string>Canvas 30 x 40 mat</string>
+      </void>
+      <void property="_Product_ID">
+       <int>4</int>
+      </void>
+      <void property="_amount">
+       <int>20</int>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="Product">
+      <void property="_Photo_ID">
+       <int>5</int>
+      </void>
+      <void property="_Photo_type">
+       <string>Canvas 30 x 40 mat</string>
+      </void>
+      <void property="_Product_ID">
+       <int>4</int>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="Product">
+      <void property="_Photo_ID">
+       <int>2</int>
+      </void>
+      <void property="_Photo_type">
+       <string>Paper 10 x 15 high gloss</string>
+      </void>
+      <void property="_Product_ID">
+       <int>1</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
