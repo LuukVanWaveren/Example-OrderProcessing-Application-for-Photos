@@ -1,25 +1,23 @@
 public class Employee extends Person {
 
-	private String _employeeID;
-	
-	private DataManager _dm = DataManager.getInstance();
+	private IdEmployee _employeeID;
 	
 	public Employee(){
+		super();
 	}
 	
-	public Employee(boolean genID){
-		super();
-		if (genID) {
-			_employeeID = _dm.get_idTracker().genID("Employee");
+	public Employee(boolean genId){
+		this();
+		if (genId) {
+			_employeeID = new IdEmployee(true);
 		}
 	}
 
-	public String get_employeeID() {
+	public IdEmployee get_employeeID() {
 		return _employeeID;
 	}
 
-	public void set_employeeID(String _employeeID) {
+	public void set_employeeID(IdEmployee _employeeID) {
 		this._employeeID = _employeeID;
 	}
-
 }

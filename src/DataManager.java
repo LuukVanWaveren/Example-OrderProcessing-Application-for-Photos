@@ -12,6 +12,7 @@ public class DataManager{
 	private static FileReadWrite _xmlReadWrite;
 	private Order _ActiveOrder;
 	private IdTracker _idTracker;
+	private OrderManager _orderManager;
 	private ArrayList<Product> _availProd;
 	private Object[][] _openHours;
 
@@ -34,9 +35,14 @@ public class DataManager{
 		_idTracker = new IdTracker();
 		load_idTracker();
 		
-		_ActiveOrder = new Order(true);
+		_orderManager = new OrderManager(true);
+		load_orderManager();
 	}
 
+
+	public OrderManager get_orderManager() {
+		return _orderManager;
+	}
 
 	public Object[][] get_openHours() {
 		return _openHours;
@@ -64,10 +70,10 @@ public class DataManager{
 	
 	public void saveOrder() {
 		try {
-			_xmlReadWrite.genXmlFromClass(get_ActiveOrder(), "\\" + get_ActiveOrder().get_OrderID() + ".xml");
-			_idTracker.set_lastUniqueOrderID(_ActiveOrder.get_OrderID());
-			_idTracker.set_lastUniqueEmployeeID(_ActiveOrder.get_employee().get_employeeID());
+			_xmlReadWrite.genXmlFromClass(get_ActiveOrder(), "\\" + get_ActiveOrder().get_orderID() + ".xml");
+			//_idTracker.set_lastUniqueEmployeeID(_ActiveOrder.get_employee().get_employeeID());
 			saveIdTracker();
+			saveOrderManager();
 		} catch (NullPointerException npe) {
 			System.out.println(npe.getMessage());
 		}
@@ -76,6 +82,14 @@ public class DataManager{
 	public void saveIdTracker() {
 		try {
 			_xmlReadWrite.genXmlFromClass(_idTracker, "\\IdTracker.xml");
+		} catch (NullPointerException npe) {
+			System.out.println(npe.getMessage());
+		}
+	}
+	
+	public void saveOrderManager() {
+		try {
+			_xmlReadWrite.genXmlFromClass(_orderManager, "\\orderManager.xml");
 		} catch (NullPointerException npe) {
 			System.out.println(npe.getMessage());
 		}
@@ -105,6 +119,14 @@ public class DataManager{
 			System.out.println(ioe.getMessage());
 		}
 	}
+	
+	public void readOrderManager() {
+		try {
+			this._orderManager = (OrderManager) _xmlReadWrite.genClassFromXml("\\orderManager.xml");
+		} catch (IOException ioe) {
+			System.out.println(ioe.getMessage());
+		}
+	}
 
 	public IdTracker get_idTracker() {
 		return _idTracker;
@@ -115,6 +137,14 @@ public class DataManager{
 			saveIdTracker();
 		} else {
 			readIdTracker();
+		}
+	}
+	
+	private void load_orderManager() {
+		if (!_xmlReadWrite.chkDir("\\saveFiles\\orderManager.xml")) {
+			saveOrderManager();
+		} else {
+			readOrderManager();
 		}
 	}
 	

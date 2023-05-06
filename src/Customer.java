@@ -1,8 +1,5 @@
 
 public class Customer extends Person {
-	
-	private String _customerID;
-	private DataManager _dm = DataManager.getInstance();
 	private String _adress;
 	private String _postal;
 	private String _place;
@@ -10,10 +7,6 @@ public class Customer extends Person {
 	
 	public Customer(){
 		super();
-		_adress = "";
-		_postal="";
-		_place="";
-		_mobileNumber="";
 	}
 	
 	public String get_adress() {
@@ -46,18 +39,5 @@ public class Customer extends Person {
 
 	public void set_mobileNumber(String _mobileNumber) {
 		this._mobileNumber = _mobileNumber;
-	}
-
-	public void genCusID(){
-		_dm.get_idTracker().genID("Customer");
-		_customerID = _dm.get_idTracker().get_lastUniqueCustomerID();
-	}
-
-	public String get_customerID() {
-		return _customerID;
-	}
-
-	public void set_customerID(String customerID) {
-		this._customerID = customerID;
 	}
 }

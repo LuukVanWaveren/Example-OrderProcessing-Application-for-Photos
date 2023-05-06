@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 
 public class ResultPanel extends SubPanel {
 
+	private static final long serialVersionUID = 1L;
+	
 	JLabel header;
 	JPanel plFiller;
 	
@@ -114,7 +116,7 @@ public class ResultPanel extends SubPanel {
 	*/
 	public void guiLoadResultFields() {
 		((JLabel)resultComponents[0][1]).setText(dm.get_ActiveOrder().get_curTimeFormatted());
-		((JLabel)resultComponents[1][1]).setText(dm.get_ActiveOrder().get_OrderID());
+		((JLabel)resultComponents[1][1]).setText(dm.get_ActiveOrder().get_orderID().toString());
 		((JLabel)resultComponents[2][1]).setText(dm.get_ActiveOrder().get_maxProdTimeFormatted());
 		((JLabel)resultComponents[3][1]).setText(dm.get_ActiveOrder().get_delivTimeFormatted());
 		((JLabel)resultComponents[4][1]).setText(String.format("%.2f",dm.get_ActiveOrder().get_totalCost()));

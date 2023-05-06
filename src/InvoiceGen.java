@@ -26,7 +26,7 @@ public class InvoiceGen {
 		document.addPage(page);
 	
 		String[] text1 = {"Invoice of photoshop order:"};
-		String[] text2 = {_order.get_OrderID()};
+		String[] text2 = {_order.get_orderID().toString()};
 		String[] text3 = {"Customer:",
 		_order.get_customer().get_Name(), 
 		_order.get_customer().get_adress(),
@@ -36,7 +36,7 @@ public class InvoiceGen {
 		_order.get_customer().get_mobileNumber()};
 		
 		String[] text4 = {"Employee:",
-		_order.get_employee().get_employeeID(),
+		_order.get_employee().get_employeeID().toString(),
 		_order.get_employee().get_Name(), 
 		_order.get_employee().get_eMail()};
 		
@@ -47,7 +47,7 @@ public class InvoiceGen {
 		"You can pickup your order at"};
 		
 		String[] text6 = {"",
-		_order.get_OrderID(), 
+		_order.get_orderID().toString(), 
 		_order.get_curTimeFormatted(),
 		_order.get_maxProdTimeFormatted(),
 		_order.get_delivTimeFormatted()};
@@ -103,7 +103,7 @@ public class InvoiceGen {
 		}
 
 		contentStream.close();
-		_pdfSaveLoc = DataManager.get_xmlReadWrite().getFolderLoc() + "\\saveFiles\\Invoice_" + _dm.get_ActiveOrder().get_OrderID() +".pdf";
+		_pdfSaveLoc = DataManager.get_xmlReadWrite().getFolderLoc() + "\\saveFiles\\Invoice_" + _dm.get_ActiveOrder().get_orderID().toString() +".pdf";
 		document.save(_pdfSaveLoc);
 		document.close();
 	}

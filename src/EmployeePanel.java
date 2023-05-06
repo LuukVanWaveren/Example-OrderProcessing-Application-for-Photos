@@ -87,15 +87,14 @@ public class EmployeePanel extends SubPanel {
 	*/
 	public void writeFieldsToOrder() {
 		Employee employee = dm.get_ActiveOrder().get_employee();
-		
-		employee.set_employeeID(((JTextField)employeeComponents[0][1]).getText());
+
 		employee.set_Name(((JTextField)employeeComponents[1][1]).getText());
 		employee.set_eMail(((JTextField)employeeComponents[2][1]).getText());
 	}
 	
 	public void guiLoadFromOrder() {
 		Employee employee = dm.get_ActiveOrder().get_employee();
-		((JTextField)employeeComponents[0][1]).setText(employee.get_employeeID());
+		((JTextField)employeeComponents[0][1]).setText(employee.get_employeeID().toString());
 		((JTextField)employeeComponents[1][1]).setText(employee.get_Name());
 		((JTextField)employeeComponents[2][1]).setText(employee.get_eMail());
 	}

@@ -5,14 +5,11 @@ public class Person {
 	private String _eMail;
 	
 	public Person(){
-		this._Name = "";
-		this._eMail = "";
 	}
 
 	public String get_Name() {
 		return _Name;
 	}
-
 
 	public void set_Name(String Name) {
 		this._Name = Name;

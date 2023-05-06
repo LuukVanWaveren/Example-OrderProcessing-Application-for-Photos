@@ -14,49 +14,56 @@ public class Order {
 	
 	private DataManager _dm = DataManager.getInstance();
 	
-	private String _OrderID;
+	private IdOrder _orderID;
 	private Customer _customer;
 	private Employee _employee;
 	private ArrayList<Product> _products;
 	private double _totalCost;
 	
 	private Timestamp _curTime;
-	private LocalDateTime _delivTime;
+	//private LocalDateTime _delivTime;
 	private Duration _maxProdTime;
 	private DateTimeFormatter _timeDTF = DateTimeFormatter.ofPattern("dd-M-yyyy HH:mm");
 	
 	private Object[][] _openHours = _dm.get_openHours();
-	
+	private OrderSummary _orderSummary;
+
 	public Order() {
 	}
 	
-	Order(boolean genID) {
-		if (genID) {
-			_OrderID = _dm.get_idTracker().genID("Order");
-			_employee = new Employee(true);
-		} else {
-			_employee = new Employee();
+	Order(boolean genId) {
+		if (genId) {
+			_orderID = new IdOrder(true);
 		}
+		_employee = new Employee(true);
 		_customer = new Customer();
+		
 		_products = new ArrayList<Product>();
 		_curTime = new Timestamp(System.currentTimeMillis());
+		_maxProdTime = Duration.ZERO;
+		_orderSummary = new OrderSummary(_orderID, _curTime, _maxProdTime);
 		updateFields();
 	}
 	
+	public OrderSummary get_orderSummary() {
+		return _orderSummary;
+	}
+
+	public void set_orderSummary(OrderSummary _orderSummary) {
+		this._orderSummary = _orderSummary;
+	}
+
 	private void calcMaxProdTime() {
 		_maxProdTime = Duration.ZERO;
-		Duration prodTime;
+		//Duration prodTime;
 		for (int i = 0; i < _products.size(); i++) {
-			prodTime = _products.get(i).get_ProdTime();
-			if (prodTime.compareTo(_maxProdTime) > 0) {
-				_maxProdTime = _products.get(i).get_ProdTime();
-			}
+			_maxProdTime = _maxProdTime.plus(_products.get(i).get_ProdTime().multipliedBy(_products.get(i).get_amount()));
 		}
 	}
 	
-	private void calcDelivTime() throws StuckInLoopException {
-		calcMaxProdTime();
-		Duration prodTimeRemaining = _maxProdTime;
+	private LocalDateTime calcDelivTime() throws StuckInLoopException {
+		Duration prodTimeRemaining = _dm.get_orderManager().calcProdTimeTillOrder(_orderSummary);
+		//Duration prodTimeRemaining = Duration.ZERO;
 		OpenHoursOnDay openHoursOnDay = new OpenHoursOnDay(_openHours, _curTime.toLocalDateTime());
 		Duration timeAvailableOnDay =  openHoursOnDay.getRemainingTimeOnDay();
 		
@@ -79,7 +86,7 @@ public class Order {
 				throw new StuckInLoopException("Program is stuck in loop after too many tries. " + j + " iterations executed");
 			}
 		}
-		_delivTime = openHoursOnDay.getLdt();
+		return openHoursOnDay.getLdt();
 	}
 	
 	public double get_totalCost() {
@@ -91,8 +98,16 @@ public class Order {
 	}
 	
 	public String get_delivTimeFormatted() {
-		if (_delivTime != null) {
-			return _delivTime.format(_timeDTF);
+		try {
+			LocalDateTime delivTime = calcDelivTime();
+			
+			if (delivTime != null) {
+				return delivTime.format(_timeDTF);
+			}
+		} catch (StuckInLoopException e) {
+			e.printStackTrace();
+			JLabel msg = new JLabel("Delivery time was not able to compute, check if opening hours are valid");
+        	JOptionPane.showMessageDialog(null, msg, "Invalid opening hours", JOptionPane.DEFAULT_OPTION);
 		}
 		return "";
 	}
@@ -127,15 +142,14 @@ public class Order {
 	}
 	
 	public void updateFields() {
-		try {
-			calcDelivTime();
-		} catch (StuckInLoopException e) {
-			e.printStackTrace();
-			JLabel msg = new JLabel("Delivery time was not able to compute, check if opening hours are valid");
-        	JOptionPane.showMessageDialog(null, msg, "Invalid opening hours", JOptionPane.DEFAULT_OPTION);
-			_delivTime=null;
-		}
+		calcMaxProdTime();
 		calcTotalPrice();
+		updateOrderSummary();
+	}
+	
+	private void updateOrderSummary() {
+		_orderSummary.set_maxProdTime(_maxProdTime.getSeconds());
+		_dm.get_orderManager().updateOrderSummary(_orderSummary);
 	}
 	
 	public Timestamp get_curTime() {
@@ -146,12 +160,12 @@ public class Order {
 		this._curTime = _curTime;
 	}
 
-	public String get_OrderID() {
-		return _OrderID;
+	public IdOrder get_orderID() {
+		return _orderID;
 	}
 
-	public void set_OrderID(String orderID) {
-		this._OrderID = orderID;
+	public void set_orderID(IdOrder _orderID) {
+		this._orderID = _orderID;
 	}
 
 	public ArrayList<Product> getProducts() {

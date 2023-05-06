@@ -16,7 +16,6 @@ public class GuiMain extends JFrame {
 	OrderPanel orderPanel;
 	ResultPanel resultPanel;
 	
-	
 	// Colors used for gui assets
 	Color colorBack = new Color(27, 31, 56);
 	Color colorPanel = new Color(44, 48, 74);
