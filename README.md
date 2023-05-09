@@ -14,7 +14,7 @@ The application has the following functionallity:
 - The order results show the total costs and when the order can be picked up in the shop.
 
 
-If java (1.8) is installed, test the app instantly by [Downloading](GitHubReadmeFiles\RunnableJar\) the runnable jar with folders and running the jar.
+If java (1.8) is installed, test the app instantly by [Downloading](GitHubReadmeFiles/RunnableJar.zip) the runnable jar with folders, unpacking it and running the jar.
 
 ## Example
 
