@@ -55,7 +55,6 @@ public class Order {
 
 	private void calcMaxProdTime() {
 		_maxProdTime = Duration.ZERO;
-		//Duration prodTime;
 		for (int i = 0; i < _products.size(); i++) {
 			_maxProdTime = _maxProdTime.plus(_products.get(i).get_ProdTime().multipliedBy(_products.get(i).get_amount()));
 		}
@@ -63,12 +62,13 @@ public class Order {
 	
 	private LocalDateTime calcDelivTime() throws StuckInLoopException {
 		Duration prodTimeRemaining = _dm.get_orderManager().calcProdTimeTillOrder(_orderSummary);
-		//Duration prodTimeRemaining = Duration.ZERO;
+		
 		OpenHoursOnDay openHoursOnDay = new OpenHoursOnDay(_openHours, _curTime.toLocalDateTime());
-		Duration timeAvailableOnDay =  openHoursOnDay.getRemainingTimeOnDay();
+		Duration timeAvailableOnDay;
 		
 		int j=0;
 		while (!prodTimeRemaining.isNegative()) {
+			timeAvailableOnDay = openHoursOnDay.getRemainingTimeOnDay();
 			if(!timeAvailableOnDay.isNegative()) {
 				/* if the production time remaining is not at least 1 hour more than the duration
 				 * available on a day, the delivery day postpones to the next day so customer has
@@ -222,6 +222,8 @@ class OpenHoursOnDay {
 	}
 	
 	private void updateRemainingTimeOnDay() {
+		//System.out.println(this._ldt.toLocalTime());
+		//System.out.println(this._closed);
 		this._remainingTimeOnDay = Duration.between(this._ldt.toLocalTime(), this._closed);
 	}
 	

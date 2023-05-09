@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_341" class="java.beans.XMLDecoder">
+ <object class="Order">
+  <void property="_curTime">
+   <object class="java.sql.Timestamp" id="Timestamp0">
+    <long>1683648327205</long>
+   </object>
+  </void>
+  <void property="_customer">
+   <object class="Customer">
+    <void property="_Name">
+     <string></string>
+    </void>
+    <void property="_adress">
+     <string></string>
+    </void>
+    <void property="_eMail">
+     <string></string>
+    </void>
+    <void property="_mobileNumber">
+     <string></string>
+    </void>
+    <void property="_place">
+     <string></string>
+    </void>
+    <void property="_postal">
+     <string></string>
+    </void>
+   </object>
+  </void>
+  <void property="_employee">
+   <object class="Employee">
+    <void property="_Name">
+     <string>asdasdas</string>
+    </void>
+    <void property="_eMail">
+     <string>asdasd</string>
+    </void>
+    <void property="_employeeID">
+     <object class="IdEmployee">
+      <void property="_idNumber">
+       <int>1</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void property="_orderID">
+   <object class="IdOrder" id="IdOrder0">
+    <void property="_idNumber">
+     <int>1</int>
+    </void>
+   </object>
+  </void>
+  <void property="_orderSummary">
+   <object class="OrderSummary">
+    <void property="_curTime">
+     <object idref="Timestamp0"/>
+    </void>
+    <void property="_maxProdTime">
+     <long>86400</long>
+    </void>
+    <void property="_orderID">
+     <object idref="IdOrder0"/>
+    </void>
+   </object>
+  </void>
+  <void property="_totalCost">
+   <double>48.0</double>
+  </void>
+  <void property="products">
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="Product">
+      <void property="_Photo_ID">
+       <int>5</int>
+      </void>
+      <void property="_Photo_type">
+       <string>Canvas 30 x 40 mat</string>
+      </void>
+      <void property="_Product_ID">
+       <int>4</int>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="Product">
+      <void property="_Photo_ID">
+       <int>5</int>
+      </void>
+      <void property="_Photo_type">
+       <string>Canvas 30 x 40 mat</string>
+      </void>
+      <void property="_Product_ID">
+       <int>4</int>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

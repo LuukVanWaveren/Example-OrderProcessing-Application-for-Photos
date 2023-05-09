@@ -1,5 +1,7 @@
+import java.awt.Desktop;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.*;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -123,5 +125,16 @@ public class InvoiceGen {
 	
 	public String get_pdfSaveLoc() {
 		return _pdfSaveLoc;
+	}
+	
+	public void openPdf() {
+		if (Desktop.isDesktopSupported()) {
+		    try {
+		        File myFile = new File(_pdfSaveLoc);
+		        Desktop.getDesktop().open(myFile);
+		    } catch (IOException ex) {
+		        // no application registered for PDFs
+		    }
+		}
 	}
 }

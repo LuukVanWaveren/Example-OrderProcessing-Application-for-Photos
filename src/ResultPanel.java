@@ -56,6 +56,7 @@ public class ResultPanel extends SubPanel {
 					try {
 						saveOrder();
 						IgGen.genPDF();
+						IgGen.openPdf();
 						JLabel msg = new JLabel("<html>Order was saved at:<br/>"+IgGen.get_pdfSaveLoc() + "<html/>");
 			        	JOptionPane.showMessageDialog(null, msg, "Invoice pdf saved", JOptionPane.DEFAULT_OPTION);
 					} catch (IOException err) {
@@ -68,8 +69,9 @@ public class ResultPanel extends SubPanel {
 		JButton btnSaveOrder = createButton("Save order", dimBtnresult);
 		btnSaveOrder.addActionListener(new ActionListener() { 
 			  public void actionPerformed(ActionEvent e) {
-				  saveOrder();
-				  loadNewOrder();
+				  if (saveOrder()) {
+					  loadNewOrder();
+				  }
 			  }
 			} );
 		JButton btnLoadOrder = createButton("Load order", dimBtnresult);
@@ -133,17 +135,19 @@ public class ResultPanel extends SubPanel {
 		guiLoadResultFields();
 	}
 	
-	private void saveOrder() {
-		  gm.customerPanel.writeFieldsToOrder();
-		  dm.get_ActiveOrder().set_employee(dm.get_ActiveEmployee());
-		  dm.get_ActiveOrder().get_orderID().updateIdTracker();
-		  //dm.get_ActiveOrder().set_employee(dm.get_ActiveEmployee());
-		  try {
+	private boolean saveOrder() {
+		gm.customerPanel.writeFieldsToOrder();
+		dm.get_ActiveOrder().set_employee(dm.get_ActiveEmployee());
+		dm.get_ActiveOrder().get_orderID().updateIdTracker();
+
+		try {
 			dm.saveOrderComplete();
+			return true;
 		} catch (Exception err) {
-        	err.printStackTrace();
-        	JLabel msg = new JLabel("No valid employee active, Select a valid employee");
-        	JOptionPane.showMessageDialog(null, msg, "No valid employee active", JOptionPane.DEFAULT_OPTION);
+			err.printStackTrace();
+			JLabel msg = new JLabel("No valid employee active, Select a valid employee");
+			JOptionPane.showMessageDialog(null, msg, "No valid employee active", JOptionPane.DEFAULT_OPTION);
 		}
+		return false;
 	}
 }

@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="17.0.7" class="java.beans.XMLDecoder">
- <object class="IdTracker">
-  <void property="_lastUniqueEmployeeID">
-   <int>2</int>
-  </void>
- </object>
+ <object class="IdTracker"/>
 </java>

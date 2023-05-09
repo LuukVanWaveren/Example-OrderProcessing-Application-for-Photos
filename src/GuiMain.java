@@ -55,14 +55,12 @@ public class GuiMain extends JFrame {
 		resultPanel.loadNewOrder();
 		
 		validate();
-		
-		employeePanel.btnSelectEmployee.doClick();
 	}
 	
 	private void StartMainWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new GridBagLayout());
-		this.setMinimumSize(new Dimension(1200, 900));
+		this.setMinimumSize(new Dimension(1400, 900));
 		this.getContentPane().setBackground(colorBack);
 		this.setVisible(true);
 	}

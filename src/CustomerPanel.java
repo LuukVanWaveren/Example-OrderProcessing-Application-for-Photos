@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JComponent;
@@ -14,9 +15,9 @@ public class CustomerPanel extends SubPanel {
 	
 	public CustomerPanel(GuiMain gm) {
 		super(gm);
+		
 		header = createHeader("CUSTOMER", 18);
-		
-		
+			
 		String[] customerFieldNames = {						//customer field names for JLabels.text
 				"Name","Adress","Postal code", "Place",
 				"E-mail adress", "Mobile number"};
