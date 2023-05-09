@@ -11,6 +11,8 @@ public class IdEmployee extends BaseId {
 		this();
 		if (genId) {
 			genId();
+		} else {
+			_idNumber = -1;
 		}
 	}
 
@@ -18,6 +20,12 @@ public class IdEmployee extends BaseId {
 	protected void genId() {
 		_idNumber = _it.get_lastUniqueEmployeeID();
 		_idNumber++;
-		_it.set_lastUniqueEmployeeID(_idNumber);
+	}
+	
+	@Override
+	protected void updateIdTracker() {
+		if (_idNumber > _it.get_lastUniqueEmployeeID()) {
+			_it.set_lastUniqueEmployeeID(_idNumber);
+		}
 	}
 }

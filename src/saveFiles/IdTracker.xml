@@ -2,10 +2,7 @@
 <java version="17.0.7" class="java.beans.XMLDecoder">
  <object class="IdTracker">
   <void property="_lastUniqueEmployeeID">
-   <int>7</int>
-  </void>
-  <void property="_lastUniqueOrderID">
-   <int>7</int>
+   <int>2</int>
   </void>
  </object>
 </java>

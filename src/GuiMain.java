@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 
 public class GuiMain extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	CustomerPanel customerPanel;
 	EmployeePanel employeePanel;
 	OpenHoursPanel openHoursPanel;
@@ -39,8 +41,8 @@ public class GuiMain extends JFrame {
 		resultPanel = new ResultPanel(this);
 		
 		
-		upperPanel.add(customerPanel, gbcPanelTop.EditGbc(0, 0, 0.5, 1));
-		upperPanel.add(employeePanel, gbcPanelTop.EditGbc(1, 0, 0.5, 0));
+		upperPanel.add(customerPanel, gbcPanelTop.EditGbc(0, 0, 0.6, 1));
+		upperPanel.add(employeePanel, gbcPanelTop.EditGbc(1, 0, 0.4, 0));
 		upperPanel.add(openHoursPanel, gbcPanelTop.EditGbc(2, 0));
 		lowerPanel.add(orderPanel, gbcPanelBotLeft);
 		lowerPanel.add(resultPanel, gbcPanelBotRight.EditGbc(1, 0));
@@ -54,9 +56,7 @@ public class GuiMain extends JFrame {
 		
 		validate();
 		
-		//resizeColumns(tableOrder, columnWidthPercentage);
-		//resizeColumns(tableOpenHours, columnWidthPercentage2);
-		
+		employeePanel.btnSelectEmployee.doClick();
 	}
 	
 	private void StartMainWindow() {

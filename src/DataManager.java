@@ -11,6 +11,7 @@ public class DataManager{
 	private static FileReadWrite _fmOpenHours;
 	private static FileReadWrite _xmlReadWrite;
 	private Order _ActiveOrder;
+	private Employee _ActiveEmployee;
 	private IdTracker _idTracker;
 	private OrderManager _orderManager;
 	private ArrayList<Product> _availProd;
@@ -18,7 +19,7 @@ public class DataManager{
 
 	private DataManager() {
 	}
-	
+
 	private void delayedConstructor() {
 		_xmlReadWrite = new FileReadWrite("\\src");
 		
@@ -37,8 +38,9 @@ public class DataManager{
 		
 		_orderManager = new OrderManager(true);
 		load_orderManager();
+		
+		_ActiveEmployee = new Employee(false);
 	}
-
 
 	public OrderManager get_orderManager() {
 		return _orderManager;
@@ -68,12 +70,21 @@ public class DataManager{
 		return _fmOpenHours.getReadCsvValues();
 	}
 	
-	public void saveOrder() {
+	public void saveOrderComplete() throws Exception {
+		saveOrder();
+		saveIdTracker();
+		saveOrderManager();
+	}
+	
+	public void saveOrder() throws Exception {
 		try {
-			_xmlReadWrite.genXmlFromClass(get_ActiveOrder(), "\\" + get_ActiveOrder().get_orderID() + ".xml");
+			if (_ActiveEmployee.get_employeeID().get_idNumber() > 0) {
+				_xmlReadWrite.genXmlFromClass(_ActiveOrder, "\\" + _ActiveOrder.get_orderID() + ".xml");
+			} else {
+				throw new Exception("No valid Employee active");
+			}
+			
 			//_idTracker.set_lastUniqueEmployeeID(_ActiveOrder.get_employee().get_employeeID());
-			saveIdTracker();
-			saveOrderManager();
 		} catch (NullPointerException npe) {
 			System.out.println(npe.getMessage());
 		}
@@ -95,6 +106,19 @@ public class DataManager{
 		}
 	}
 	
+	public void saveEmployeeComplete() {
+		saveEmployee();
+		saveIdTracker();
+	}
+	
+	public void saveEmployee() {
+		try {
+			_xmlReadWrite.genXmlFromClass(get_ActiveEmployee(), "\\" + get_ActiveEmployee().get_employeeID() + ".xml");
+		} catch (NullPointerException npe) {
+			System.out.println(npe.getMessage());
+		}
+	}
+	
 	public Order get_ActiveOrder() {
 		return _ActiveOrder;
 	}
@@ -103,10 +127,26 @@ public class DataManager{
 		_ActiveOrder = ActiveOrder;
 	}
 
+	public Employee get_ActiveEmployee() {
+		return _ActiveEmployee;
+	}
+
+	public void set_ActiveEmployee(Employee _ActiveEmployee) {
+		this._ActiveEmployee = _ActiveEmployee;
+	}
+	
 	public void readOrder(String orderID) {
 		try {
 			_ActiveOrder = (Order) _xmlReadWrite.genClassFromXml("\\" + orderID + ".xml");
 			_ActiveOrder.updateFields();
+		} catch (IOException ioe) {
+			System.out.println(ioe.getMessage());
+		}
+	}
+	
+	public void readEmployee(String employeeID) {
+		try {
+			_ActiveEmployee = (Employee) _xmlReadWrite.genClassFromXml("\\" + employeeID + ".xml");
 		} catch (IOException ioe) {
 			System.out.println(ioe.getMessage());
 		}

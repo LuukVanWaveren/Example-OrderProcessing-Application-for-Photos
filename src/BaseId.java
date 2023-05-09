@@ -13,10 +13,17 @@ public class BaseId {
 	
 	protected void genId() {
 	}
+	
+	protected void updateIdTracker() {
+	}
 
     @Override
     public String toString() {
-    	return String.format("%s%0" + _idNumberLength + "d", _idTag, _idNumber);
+    	if (_idNumber > 0) {
+    		return String.format("%s%0" + _idNumberLength + "d", _idTag, _idNumber);
+    	} else {
+    		return String.format("%s%s", _idTag, "__");
+    	}
     }
 
 	public int get_idNumber() {

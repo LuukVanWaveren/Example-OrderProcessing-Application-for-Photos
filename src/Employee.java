@@ -10,6 +10,8 @@ public class Employee extends Person {
 		this();
 		if (genId) {
 			_employeeID = new IdEmployee(true);
+		} else {
+			_employeeID = new IdEmployee(false);
 		}
 	}
 

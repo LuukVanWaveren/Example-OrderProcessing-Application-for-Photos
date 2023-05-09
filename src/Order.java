@@ -35,7 +35,7 @@ public class Order {
 		if (genId) {
 			_orderID = new IdOrder(true);
 		}
-		_employee = new Employee(true);
+		_employee = new Employee(false);
 		_customer = new Customer();
 		
 		_products = new ArrayList<Product>();

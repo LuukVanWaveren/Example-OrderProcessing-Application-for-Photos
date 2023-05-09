@@ -55,11 +55,10 @@ public class OrderManager {
 		return -1;
 	}
 	
-	private void showOrderPriority() {
+	public void showOrderPriority() {
 		for ( int i = 0 ; i < _orderPriority.size(); i++) {
 			System.out.format(_orderPriority.get(i).get_orderID() + ", %d\n", _orderPriority.get(i).get_maxProdTime());
 		}
-
 	}
 	
 	public Duration calcProdTimeTillOrder(OrderSummary orderSummary) {

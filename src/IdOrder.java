@@ -18,6 +18,12 @@ public class IdOrder extends BaseId {
 	protected void genId() {
 		_idNumber = _it.get_lastUniqueOrderID();
 		_idNumber++;
-		_it.set_lastUniqueOrderID(_idNumber);
+	}
+	
+	@Override
+	protected void updateIdTracker() {
+		if (_idNumber > _it.get_lastUniqueOrderID()) {
+			_it.set_lastUniqueOrderID(_idNumber);
+		}
 	}
 }

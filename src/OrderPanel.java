@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class OrderPanel extends SubPanel {
 
+	private static final long serialVersionUID = 1L;
+
 	float[] columnWidthPercentage = {0.05f, 0.55f, 0.1f, 0.1f, 0.03f};
 	
 	Product[] items;

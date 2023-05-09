@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class OpenHoursPanel extends SubPanel {
 
+	private static final long serialVersionUID = 1L;
+	
 	JLabel header;
 	float[] columnWidthPercentage = {0.4f, 0.15f, 0.15f};
 	

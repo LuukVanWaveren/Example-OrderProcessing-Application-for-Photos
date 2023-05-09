@@ -2,7 +2,7 @@
  
 **Luuk van Waveren - May 2023**
 
-During my IT Traineeship I made an Example Java application as a test of my programming skills. The fictional setting entails a shop that sells photos.
+During my IT Traineeship I made an Example Java application as a test of my beginner programming skills. The fictional setting entails a shop that sells photos.
 An employee of the shop creates orders using this application on the customers behalf and gets information on the costs and delivery date where photo printing is 
 
 The application has the following functionallity:
